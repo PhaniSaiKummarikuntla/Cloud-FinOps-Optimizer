@@ -40,11 +40,17 @@ uvicorn app.main:app --reload
 
 ```
 
-## Running with Docker
 
 
-docker build -t cloud-finops .
-docker run -p 8000:8000 cloud-finops
+## Run Using Docker
+
+Build Docker image
+
+docker build -t expense-tracker-api .
+
+Run container
+
+docker run -p 5000:5000 expense-tracker-api
 
 Open:
 http://localhost:8000
