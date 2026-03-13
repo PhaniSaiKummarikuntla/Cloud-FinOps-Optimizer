@@ -1,16 +1,23 @@
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+from pathlib import Path
 
 from app.analyzer import health, dashboard_summary, total_cost, service_costs, idle_resources, optimization_recommendations
 
 app = FastAPI()
 
-@app.get("/")
-def home():
-    return {"message": "Cloud FinOps Optimization API"}
+# @app.get("/")
+# def home():
+#     return {"message": "Cloud FinOps Optimization API"}
+
+@app.get("/", response_class=HTMLResponse)
+def dashboard_ui():
+    html = Path("dashboard/index.html").read_text()
+    return html
 
 @app.get("/total-cost")
-def get_totat_cost():
-    return {"total cost":total_cost()}
+def get_total_cost():
+    return {"total_cost":total_cost()}
 
 @app.get("/service-costs")
 def get_service_costs():
@@ -34,5 +41,7 @@ def get_dashboard():
 @app.get("/health")
 def get_health():
     return health()
+
+
 
 

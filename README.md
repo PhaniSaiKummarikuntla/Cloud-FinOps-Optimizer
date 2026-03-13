@@ -32,3 +32,22 @@ This project simulates a Cloud FinOps system that analyzes cloud resource usage 
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 
+## Run With Docker
+
+```bash
+docker build -t cloud-finops
+dcoker run -p 8000:8000 cloud-finops
+
+
+## Architecture
+
+User → Web Dashboard → FastAPI Backend → Cost Analysis Engine → Cloud Usage Dataset
+
+## Features
+
+* Cloud cost analytics dashboard
+* Service-level cost visualization
+* Idle resource detection
+* Optimization recommendations
+* REST API backend (FastAPI)
+* Containerized deployment using Docker

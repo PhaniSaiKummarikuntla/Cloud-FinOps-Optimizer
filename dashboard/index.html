@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Cloud FinOps Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{
+font-family: Arial;
+background:#f5f6fa;
+padding:40px;
+}
+
+h1{
+color:#2f3640;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:20px 0;
+border-radius:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<h1>Cloud FinOps Cost Dashboard</h1>
+
+<div class="card">
+<h2>Total Cost</h2>
+<p id="totalCost">Loading...</p>
+</div>
+
+<div class="card">
+<h2>Service Cost Distribution</h2>
+<canvas id="serviceChart"></canvas>
+</div>
+
+<div class="card">
+<h2>Idle Resources</h2>
+<pre id="idleResources"></pre>
+</div>
+
+<div class="card">
+<h2>Optimization Recommendations</h2>
+
+<button onclick="loadRecommendations()">Run Optimization</button>
+
+<pre id="recommendations"></pre>
+
+</div>
+
+<script>
+
+async function loadDashboard(){
+
+// Total Cost
+let total = await fetch("/total-cost");
+let totalData = await total.json();
+document.getElementById("totalCost").innerText = "$" + totalData.total_cost;
+
+
+// Service Costs
+let services = await fetch("/service-costs");
+let servicesData = await services.json();
+
+const ctx = document.getElementById("serviceChart");
+
+new Chart(ctx, {
+type: 'pie',
+data: {
+labels: Object.keys(servicesData),
+datasets: [{
+data: Object.values(servicesData),
+backgroundColor: [
+'#4CAF50',
+'#2196F3',
+'#FFC107',
+'#FF5722',
+'#9C27B0'
+]
+}]
+}
+});
+
+
+// Idle Resources
+let idle = await fetch("/idle-resources");
+let idleData = await idle.json();
+document.getElementById("idleResources").innerText =
+JSON.stringify(idleData,null,2);
+
+}
+
+loadDashboard();
+
+async function loadRecommendations(){
+
+let response = await fetch("/recommendations");
+
+let data = await response.json();
+
+document.getElementById("recommendations").innerText =
+JSON.stringify(data,null,2);
+
+}
+
+
+</script>
+
+
+</body>
+</html>
