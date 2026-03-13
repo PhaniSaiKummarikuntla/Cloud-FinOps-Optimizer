@@ -1,5 +1,10 @@
 # Cloud FinOps Cost Optimization Platform
 
+## Dashboard Preview
+
+![Cloud FinOps Dashboard](screenshots/dashboard.png)
+
+
 This project simulates a Cloud FinOps system that analyzes cloud resource usage and identifies cost optimization opportunities.
 
 ## Features
