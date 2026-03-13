@@ -38,9 +38,10 @@ This project simulates a Cloud FinOps system that analyzes cloud resource usage 
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 
-
+```
 
 ## Running with Docker
+
 
 docker build -t cloud-finops .
 docker run -p 8000:8000 cloud-finops
