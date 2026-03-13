@@ -1,0 +1,9 @@
+service,resource_id,cost,usage_hours
+EC2,i-12345,120,5
+EC2,i-67890,30,1
+EC2,i-99999,150,0
+S3,bucket-001,50,100
+S3,bucket-002,20,5
+RDS,db-01,200,10
+Lambda,func-01,5,1
+Lambda,func-02,8,0
